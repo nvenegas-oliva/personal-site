@@ -1,0 +1,54 @@
+---
+import Layout from './Layout.astro';
+import Nav from '../components/Nav.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  date: Date;
+  tags?: string[];
+}
+
+const { title, description, date, tags } = Astro.props;
+
+const formattedDate = date.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<Layout title={`${title} — Nicolás Venegas`} description={description} article>
+  <Nav />
+  <main class="max-w-2xl mx-auto px-6 pt-32 pb-20">
+    <article>
+      <header class="mb-12">
+        <a
+          href="/blog"
+          class="text-sm text-teal-600 dark:text-teal-400 hover:underline mb-4 inline-block"
+        >
+          &larr; Back to writing
+        </a>
+        <h1 class="text-3xl font-medium tracking-tight mb-4">{title}</h1>
+        <time
+          datetime={date.toISOString()}
+          class="text-sm text-gray-500 dark:text-neutral-400 font-mono"
+        >
+          {formattedDate}
+        </time>
+        {tags && tags.length > 0 && (
+          <div class="flex gap-2 mt-3">
+            {tags.map((tag) => (
+              <span class="text-xs font-mono px-2 py-1 bg-gray-100 dark:bg-white/[0.06] rounded">
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
+      </header>
+      <div class="prose dark:prose-invert prose-gray max-w-none prose-headings:font-medium prose-a:text-teal-600 dark:prose-a:text-teal-400 prose-code:font-mono">
+        <slot />
+      </div>
+    </article>
+  </main>
+</Layout>

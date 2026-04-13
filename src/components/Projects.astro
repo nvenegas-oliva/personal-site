@@ -1,0 +1,47 @@
+---
+import ProjectCard from './ProjectCard.astro';
+---
+
+<section id="projects" class="py-24">
+  <div class="max-w-5xl mx-auto px-6">
+    <h2 class="text-2xl font-medium tracking-tight mb-8">Projects</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <ProjectCard
+        title="Cosmos Platform"
+        description="Internal AI platform for LATAM Airlines"
+        problem="LATAM had zero AI infrastructure — no pipelines, no evaluation, no model management. Every team was experimenting independently with no path to production."
+        architecture="LightRAG for retrieval, GenAI Gateway for model routing, centralized evaluation framework, agentic orchestration layer. Built as a platform so every team ships through the same production-grade pipeline."
+        decisions="Chose LightRAG over custom retrieval to accelerate time-to-production. Designed the gateway as a routing layer for cost optimization across model providers. Insisted on evaluation-as-a-gate — no capability reaches production without passing the eval framework."
+        result="779K+ RAG calls in production, 7+ AI capabilities shipped, 50K+ aviation manual pages indexed. Platform serves millions of passengers."
+      />
+
+      <ProjectCard
+        title="Cosmos Evaluator"
+        description="Evaluation framework for LLM applications in aviation"
+        problem="Aviation is a regulated industry where hallucinations aren't just annoying — they're dangerous. There was no systematic way to measure whether an LLM capability was safe to deploy."
+        architecture="Multi-dimensional evaluation pipeline: hallucination detection, faithfulness scoring, safety checks, cost-per-conversation metrics. Runs on every capability before production deployment."
+        decisions="Designed the framework to gate deployments, not just report metrics. Built around aviation-specific failure modes — a general-purpose eval wouldn't catch domain-critical errors. Chose cost-per-conversation as a first-class metric alongside quality."
+        result="Every AI capability at LATAM passes through this framework before reaching production. Catches critical failures before they reach passengers."
+      />
+
+      <ProjectCard
+        title="LATAM Chat / Concierge Agent"
+        description="Agentic customer service chatbot with tool use and human-in-the-loop"
+        problem="Customer service needed AI-powered assistance across multiple languages, but agentic systems fail in unpredictable ways — especially in high-stakes travel scenarios."
+        architecture="Agentic architecture with tool use for booking operations, multi-language support, human-in-the-loop escalation paths, and structured fallback strategies."
+        decisions="Designed explicit failure modes and escalation triggers rather than letting the agent attempt recovery. Chose human-in-the-loop as a feature, not a fallback — some decisions should always involve a human."
+        result="Serving LATAM passengers with AI-powered assistance while maintaining safety through structured escalation and human oversight."
+      />
+
+      <ProjectCard
+        title="MCP Server"
+        description="Connecting legacy airline systems to Claude via Model Context Protocol"
+        problem="Legacy airline systems hold critical data but expose it through outdated interfaces that modern AI tools can't access natively."
+        architecture="Model Context Protocol server bridging Claude to airline reservation, flight, and operations systems."
+        decisions="Building as a personal project to demonstrate hands-on MCP implementation. Will be open source."
+        result="In development — will include public GitHub repository."
+        status="coming"
+      />
+    </div>
+  </div>
+</section>
